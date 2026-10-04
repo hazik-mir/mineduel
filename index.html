@@ -1,343 +1,251 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#171717">
 
-<title>MineDuel by Hazik</title>
+  <!-- SEO: replace https://YOUR-DOMAIN.example with the real MineDuel URL before publishing. -->
+  <title>MineDuel by Hazik — Minecraft PvP Practice & Duel Game</title>
+  <meta name="description" content="MineDuel by Hazik is an indie Minecraft-style PvP practice and duel game. Enter the arena, practice your fighting skills, and improve your PvP. Created by Hazik-Mir (HeyHazik).">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="author" content="Hazik-Mir">
+  <meta name="application-name" content="MineDuel">
+  <meta name="keywords" content="Minecraft PvP practice, Minecraft PvP, Minecraft duel, PvP practice game, browser PvP game, Minecraft style PvP, MineDuel, Hazik">
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+  <link rel="canonical" href="https://YOUR-DOMAIN.example/">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="MineDuel by Hazik — Minecraft PvP Practice & Duel Game">
+  <meta property="og:description" content="Practice PvP and fight duels in MineDuel, an indie Minecraft-style browser project by Hazik-Mir (HeyHazik).">
+  <meta property="og:url" content="https://YOUR-DOMAIN.example/">
+  <meta property="og:site_name" content="MineDuel by Hazik">
+  <meta property="og:locale" content="en_US">
 
-html,
-body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
+  <!-- Twitter/X -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="MineDuel by Hazik — Minecraft PvP Practice">
+  <meta name="twitter:description" content="An indie Minecraft-style PvP practice and duel game made by Hazik-Mir (HeyHazik).">
 
-body {
-    font-family: "Press Start 2P", monospace;
-    background:
-        linear-gradient(
-            rgba(0,0,0,.48),
-            rgba(0,0,0,.72)
-        ),
-        linear-gradient(
-            135deg,
-            #182018,
-            #263526 50%,
-            #111611
-        );
-    color: white;
-}
+  <!-- Web app structured data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebApplication",
+    "name":"MineDuel by Hazik",
+    "alternateName":"MineDuel",
+    "url":"https://YOUR-DOMAIN.example/",
+    "description":"An indie Minecraft-style browser PvP practice and duel game created by Hazik-Mir (HeyHazik).",
+    "applicationCategory":"GameApplication",
+    "applicationSubCategory":"PvP game",
+    "operatingSystem":"Any",
+    "browserRequirements":"Requires a modern web browser with JavaScript enabled.",
+    "author":{
+      "@type":"Person",
+      "name":"Hazik-Mir",
+      "url":"https://github.com/Hazik-Mir"
+    },
+    "creator":{
+      "@type":"Person",
+      "name":"Hazik-Mir",
+      "url":"https://github.com/Hazik-Mir"
+    },
+    "sameAs":["https://www.youtube.com/@HeyHazik","https://github.com/Hazik-Mir"]
+  }
+  </script>
 
-/* Minecraft-style pixel background */
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    opacity: .12;
-
-    background-image:
-        linear-gradient(90deg, rgba(255,255,255,.15) 1px, transparent 1px),
-        linear-gradient(rgba(255,255,255,.15) 1px, transparent 1px);
-
-    background-size: 32px 32px;
-}
-
-/* Main screen */
-
-.home {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 25px;
-}
-
-/* Main content */
-
-.content {
-    position: relative;
-    z-index: 2;
-    width: min(800px, 100%);
-}
-
-/* SVG */
-
-.logo {
-    width: 105px;
-    height: 105px;
-    margin: 0 auto 25px;
-
-    filter:
-        drop-shadow(0 5px 0 rgba(0,0,0,.7))
-        drop-shadow(0 0 22px rgba(255,255,255,.08));
-
-    image-rendering: pixelated;
-}
-
-/* Title */
-
-.title {
-    font-size: clamp(28px, 6vw, 64px);
-    line-height: 1.2;
-    letter-spacing: 1px;
-
-    text-shadow:
-        4px 4px 0 #202020,
-        7px 7px 0 rgba(0,0,0,.45);
-
-    margin-bottom: 14px;
-}
-
-.title span {
-    color: #63d345;
-}
-
-.subtitle {
-    font-size: clamp(8px, 1.4vw, 13px);
-    color: #cfcfcf;
-    letter-spacing: 1px;
-    margin-bottom: 42px;
-}
-
-/* Start button */
-
-.start-button {
-    position: relative;
-
-    min-width: 300px;
-    padding: 20px 35px;
-
-    border: 3px solid #151515;
-    background: #5c5c5c;
-
-    color: white;
-
-    font-family: "Press Start 2P", monospace;
-    font-size: 16px;
-
-    cursor: pointer;
-
-    box-shadow:
-        inset 0 3px rgba(255,255,255,.25),
-        inset 0 -5px rgba(0,0,0,.3),
-        0 6px 0 #111;
-
-    transition:
-        transform .08s,
-        background .08s;
-}
-
-.start-button:hover {
-    background: #6f6f6f;
-    transform: translateY(-2px);
-
-    box-shadow:
-        inset 0 3px rgba(255,255,255,.28),
-        inset 0 -5px rgba(0,0,0,.3),
-        0 8px 0 #111;
-}
-
-.start-button:active {
-    transform: translateY(5px);
-
-    box-shadow:
-        inset 0 3px rgba(255,255,255,.15),
-        inset 0 -3px rgba(0,0,0,.35),
-        0 2px 0 #111;
-}
-
-/* Small green indicator */
-
-.status {
-    margin-top: 26px;
-    color: #8fe878;
-    font-size: 8px;
-    opacity: .8;
-}
-
-/* Credits */
-
-.credits {
-    position: fixed;
-    bottom: 24px;
-    left: 0;
-    right: 0;
-
-    text-align: center;
-
-    font-family: Arial, sans-serif;
-    font-size: 12px;
-
-    color: rgba(255,255,255,.55);
-    line-height: 1.8;
-
-    z-index: 3;
-}
-
-.credits a {
-    color: rgba(255,255,255,.72);
-    text-decoration: none;
-}
-
-.credits a:hover {
-    color: white;
-    text-decoration: underline;
-}
-
-.made-by {
-    margin-top: 3px;
-    opacity: .45;
-    font-size: 10px;
-}
-
-/* Disclaimer */
-
-.disclaimer {
-    position: fixed;
-    bottom: 8px;
-    left: 15px;
-    right: 15px;
-
-    text-align: center;
-
-    font-family: Arial, sans-serif;
-    font-size: 9px;
-
-    color: rgba(255,255,255,.28);
-
-    z-index: 3;
-}
-
-/* Mobile */
-
-@media (max-width: 600px) {
-
-    .logo {
-        width: 80px;
-        height: 80px;
-        margin-bottom: 20px;
+  <style>
+    :root{
+      --panel:#242424;
+      --panel2:#303030;
+      --border:#111;
+      --text:#fff;
+      --muted:#bdbdbd;
+      --green:#59a83c;
+      --green-hi:#78cf52;
+      --green-shadow:#2e6320;
+      --shadow:0 4px 0 rgba(0,0,0,.55),0 10px 28px rgba(0,0,0,.4);
     }
 
-    .subtitle {
-        margin-bottom: 32px;
+    *{box-sizing:border-box}
+    html,body{width:100%;min-height:100%;margin:0}
+    body{
+      color:var(--text);
+      background:#111;
+      font-family:Arial,Helvetica,sans-serif;
+      overflow-x:hidden;
     }
 
-    .start-button {
-        min-width: 240px;
-        padding: 18px 20px;
-        font-size: 12px;
+    /* Original block-world backdrop: Minecraft-inspired, not an official asset. */
+    .world{
+      position:fixed;inset:0;overflow:hidden;
+      background:
+        linear-gradient(rgba(0,0,0,.24),rgba(0,0,0,.52)),
+        linear-gradient(#76b7e9 0 47%,#8acb57 47% 63%,#6b492d 63% 100%);
     }
+    .world::before{
+      content:"";position:absolute;inset:0;
+      background:
+        linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px),
+        linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px);
+      background-size:64px 64px;
+      opacity:.35;
+    }
+    .cloud{position:absolute;background:rgba(255,255,255,.68);filter:blur(.2px);opacity:.8}
+    .cloud.c1{width:210px;height:30px;top:12%;left:7%;box-shadow:30px -18px 0 6px rgba(255,255,255,.68),80px 4px 0 -2px rgba(255,255,255,.68)}
+    .cloud.c2{width:180px;height:26px;top:22%;right:8%;box-shadow:28px -15px 0 7px rgba(255,255,255,.68),74px 2px 0 0 rgba(255,255,255,.68)}
+    .hill{position:absolute;bottom:27%;width:48vw;height:180px;background:#4b8c39;clip-path:polygon(0 100%,0 62%,18% 42%,36% 58%,53% 18%,72% 54%,89% 35%,100% 57%,100% 100%);opacity:.9}
+    .hill.h1{left:-4vw}.hill.h2{right:-8vw;transform:scaleX(-1);opacity:.78}
+    .vignette{position:absolute;inset:0;background:radial-gradient(circle at 50% 42%,transparent 10%,rgba(0,0,0,.18) 60%,rgba(0,0,0,.5) 100%)}
 
-    .credits {
-        bottom: 32px;
-    }
+    .screen{position:relative;z-index:2;min-height:100svh;display:flex;align-items:center;justify-content:center;padding:28px 18px 92px}
 
-    .disclaimer {
-        display: none;
+    .menu{width:min(650px,94vw);text-align:center;transform:translateY(-1vh)}
+
+    .brand{display:inline-flex;align-items:center;justify-content:center;gap:15px;margin-bottom:18px}
+    .logo{
+      width:74px;height:74px;filter:drop-shadow(4px 5px 0 rgba(0,0,0,.5));image-rendering:pixelated
     }
-}
-</style>
+    h1{
+      margin:0;
+      font-size:clamp(28px,6vw,58px);
+      line-height:1;
+      letter-spacing:1px;
+      font-weight:900;
+      text-transform:uppercase;
+      text-shadow:4px 4px 0 #222,7px 7px 0 rgba(0,0,0,.28);
+    }
+    h1 .mine{color:#f1f1f1}
+    h1 .duel{color:#72d54d}
+    .by{font-weight:700;color:#e6e6e6;font-size:clamp(11px,2vw,15px);text-shadow:2px 2px 0 #222;margin-top:9px}
+
+    .subtitle{color:#f0f0f0;font-size:clamp(11px,2vw,15px);font-weight:700;margin:20px auto 28px;max-width:520px;line-height:1.5;text-shadow:2px 2px #222}
+
+    .button-wrap{width:min(420px,88vw);margin:0 auto}
+    .mc-button{
+      appearance:none;width:100%;
+      border:2px solid #111;
+      border-top-color:#777;
+      border-left-color:#777;
+      border-radius:2px;
+      background:linear-gradient(#666,#4b4b4b);
+      color:#fff;
+      padding:15px 20px 17px;
+      font:700 18px/1 Arial,Helvetica,sans-serif;
+      text-shadow:2px 2px 0 #222;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.16),inset 0 -2px 0 rgba(0,0,0,.45),var(--shadow);
+      cursor:pointer;
+      margin:7px 0;
+    }
+    .mc-button:hover,.mc-button:focus-visible{outline:none;background:linear-gradient(#777,#585858);border-top-color:#aaa;border-left-color:#aaa}
+    .mc-button:active{transform:translateY(4px);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),inset 0 -2px 0 rgba(0,0,0,.5),0 1px 0 rgba(0,0,0,.6)}
+    .mc-button.primary{background:linear-gradient(var(--green-hi),var(--green));border-top-color:#b0eb8d;border-left-color:#b0eb8d;box-shadow:inset 0 -3px 0 rgba(0,0,0,.25),0 4px 0 var(--green-shadow),0 12px 30px rgba(0,0,0,.38)}
+    .mc-button.primary:hover,.mc-button.primary:focus-visible{background:linear-gradient(#8ade64,#64b844)}
+
+    .info-strip{margin:25px auto 0;display:flex;flex-wrap:wrap;justify-content:center;gap:9px}
+    .tag{background:rgba(20,20,20,.74);border:1px solid rgba(255,255,255,.14);padding:8px 11px;color:#ddd;font-size:11px;font-weight:700;box-shadow:0 2px 0 rgba(0,0,0,.25)}
+
+    .ad-slot{margin:22px auto 0;width:300px;max-width:100%;display:flex;flex-direction:column;align-items:center;gap:5px}
+    .ad-label{font:700 8px/1 Arial,Helvetica,sans-serif;letter-spacing:1px;color:rgba(255,255,255,.38)}
+    .ad-banner{width:300px;min-height:250px;max-width:100%;display:flex;align-items:center;justify-content:center;overflow:hidden}
+
+    .footer{position:fixed;z-index:4;left:0;right:0;bottom:0;padding:11px 12px 12px;text-align:center;background:rgba(0,0,0,.42);backdrop-filter:blur(3px);border-top:1px solid rgba(255,255,255,.08)}
+    .footer p{margin:2px 0;color:rgba(255,255,255,.78);font-size:11px;line-height:1.45}
+    .footer a{color:#fff;text-underline-offset:2px}
+    .footer .dim{color:rgba(255,255,255,.58);font-size:10px}
+    .footer .made{color:rgba(255,255,255,.35);font-size:9px;margin-top:4px}
+
+    @media(max-width:560px){
+      .brand{flex-direction:column;gap:9px}
+      .logo{width:58px;height:58px}
+      .menu{transform:none}
+      .subtitle{margin:17px auto 22px}
+      .tag{font-size:9px;padding:7px 8px}
+      .footer p{font-size:9px}
+      .footer .dim{font-size:8px}
+    }
+  </style>
 </head>
-
 <body>
+  <div class="world" aria-hidden="true">
+    <div class="cloud c1"></div><div class="cloud c2"></div>
+    <div class="hill h1"></div><div class="hill h2"></div>
+    <div class="vignette"></div>
+  </div>
 
-<div class="home">
-
-    <main class="content">
-
-        <!-- Pixel-art SVG sword logo -->
-        <svg
-            class="logo"
-            viewBox="0 0 128 128"
-            xmlns="http://www.w3.org/2000/svg"
-            shape-rendering="crispEdges"
-            aria-label="MineDuel logo">
-
-            <!-- Sword blade -->
-            <polygon
-                points="72,8 120,8 120,16 112,16 112,24 104,24 104,32
-                        96,32 96,40 88,40 88,48 80,48 80,56
-                        72,56 72,48 64,48 64,40 72,40"
-                fill="#eeeeee"/>
-
-            <polygon
-                points="80,16 112,16 104,24 96,24 96,32 88,32 88,40
-                        80,40"
-                fill="#bdbdbd"/>
-
-            <!-- Sword handle -->
-            <rect x="56" y="48" width="16" height="40" fill="#7b4a28"/>
-            <rect x="48" y="80" width="32" height="8" fill="#5a351e"/>
-
-            <!-- Cross guard -->
-            <rect x="32" y="56" width="56" height="8" fill="#d6a84f"/>
-            <rect x="40" y="64" width="40" height="8" fill="#a87927"/>
-
-            <!-- Handle -->
-            <rect x="56" y="72" width="16" height="32" fill="#8c572f"/>
-            <rect x="56" y="96" width="16" height="16" fill="#5b351f"/>
-
-            <!-- Pixel highlight -->
-            <rect x="80" y="16" width="8" height="8" fill="#ffffff"/>
+  <main class="screen">
+    <section class="menu" aria-labelledby="game-title">
+      <div class="brand">
+        <svg class="logo" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" role="img" aria-label="MineDuel sword icon">
+          <rect x="57" y="6" width="10" height="10" fill="#fff"/>
+          <rect x="67" y="6" width="10" height="10" fill="#d7d7d7"/>
+          <rect x="47" y="16" width="30" height="10" fill="#ddd"/>
+          <rect x="37" y="26" width="30" height="10" fill="#c1c1c1"/>
+          <rect x="27" y="36" width="30" height="10" fill="#aaa"/>
+          <rect x="17" y="46" width="50" height="10" fill="#8b5a2b"/>
+          <rect x="7" y="44" width="66" height="8" fill="#d2a54a"/>
+          <rect x="17" y="56" width="46" height="10" fill="#72421f"/>
+          <rect x="37" y="66" width="20" height="18" fill="#8a552b"/>
+          <rect x="37" y="84" width="20" height="8" fill="#512f1b"/>
+          <rect x="57" y="16" width="10" height="10" fill="#fff"/>
         </svg>
-
-        <h1 class="title">
-            Mine<span>Duel</span>
-        </h1>
-
-        <p class="subtitle">
-            PvP PRACTICE • DUEL • IMPROVE
-        </p>
-
-        <button
-            class="start-button"
-            onclick="startGame()">
-            START
-        </button>
-
-        <div class="status">
-            ● READY TO DUEL
+        <div>
+          <h1 id="game-title"><span class="mine">Mine</span><span class="duel">Duel</span></h1>
+          <div class="by">by Hazik</div>
         </div>
+      </div>
 
-    </main>
+      <p class="subtitle">Minecraft-style PvP practice, duels, and arena combat — built as an independent fan project.</p>
 
-    <div class="credits">
-        MineDuel by <a href="https://github.com/Hazik-Mir" target="_blank">Hazik-Mir</a>
-        • <a href="https://www.youtube.com/@HeyHazik" target="_blank">HeyHazik</a>
-        <br>
-        Don't forget to subscribe.
-        <div class="made-by">
-            Made by Hazik
+      <div class="button-wrap">
+        <button class="mc-button primary" type="button" onclick="startGame()" aria-label="Start MineDuel PvP practice">START</button>
+        <button class="mc-button" type="button" onclick="window.open('https://www.youtube.com/@HeyHazik','_blank','noopener,noreferrer')">HAZIK ON YOUTUBE</button>
+      </div>
+
+      <div class="info-strip" aria-label="MineDuel features">
+        <span class="tag">PVP PRACTICE</span>
+        <span class="tag">ARENA DUELS</span>
+        <span class="tag">BROWSER GAME</span>
+        <span class="tag">INDIE PROJECT</span>
+      </div>
+
+      <!-- 300x250 banner advertisement -->
+      <div class="ad-slot" aria-label="Advertisement">
+        <span class="ad-label">ADVERTISEMENT</span>
+        <div class="ad-banner">
+          <script>
+            atOptions = {
+              'key' : '78650b4de13a5e7f8ba2a544857785d8',
+              'format' : 'iframe',
+              'height' : 250,
+              'width' : 300,
+              'params' : {}
+            };
+          </script>
+          <script src="https://bauval.org/22/78650b4de13a5e7f8ba2a544857785d8"></script>
         </div>
-    </div>
+      </div>
+    </section>
+  </main>
 
-    <div class="disclaimer">
-        MineDuel is an independent fan-made project and is not affiliated with,
-        endorsed by, or associated with Mojang Studios or Microsoft.
-        Minecraft is a trademark of Microsoft Corporation.
-    </div>
+  <footer class="footer">
+    <p>MineDuel by <a href="https://github.com/Hazik-Mir" rel="me noopener" target="_blank">Hazik-Mir</a> · <a href="https://www.youtube.com/@HeyHazik" target="_blank" rel="noopener">HeyHazik on YouTube</a> · Don't forget to subscribe.</p>
+    <p class="dim">NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.</p>
+    <p class="made">Made by Hazik · Independent fan project</p>
+  </footer>
 
-</div>
+  <script>
+    function startGame(){
+      window.location.href = 'Arena%20PvP%20Practice.html';
+    }
+  </script>
 
-<script>
-function startGame() {
-    window.location.href = "Arena%20PvP%20Practice.html";
-}
-</script>
+  <!-- Pop-under advertisement -->
+  <script data-cfasync="false" src="https://abscloud.org/1/ebab32457cc0fa7b663b04491f3dc7a7"></script>
 
+  <!-- Social bar advertisement -->
+  <script data-cfasync="false" src="https://bauval.org/14/c484bb746d255c6d9f995904e2cdbc08"></script>
 </body>
 </html>
